@@ -1,0 +1,52 @@
+ 
+{% extends "mainblog/layout.html" %}
+{% block body %}
+	<!--Main container start -->
+	<main class="main-container">
+
+		<section class="main-content extra-pages">
+			<div class="main-content-wrapper add-to-margin">
+				<div class="content-body">
+
+					<!-- article body start -->
+					<article class="article-wrapper">
+						<div class="article-content">
+							<h1 class="extra-title">About Us</h1>
+							<div class="article-inner">
+								  {% autoescape off %}
+								 {% for authers in authers %}
+									 
+								 {{authers.content}}
+
+								 {% endfor %}
+								 {% endautoescape %}
+							</div>
+
+							<!--this is important for the left ad box or share box fixer -->
+							<div id="endOfTheArticle"></div>
+
+						</div>
+					</article>
+					<!-- article body end -->
+
+				</div>
+				<div class="content-sidebar">
+					<div class="sidebar_inner">
+						
+						<div class="sidebar-spacer"></div>
+						<div class="sidebar-button-group">
+							<a href="about-us.html" class="sidebar-buttons material-button active"><i class="material-icons">&#xE851;</i><span class="btn-label">About Us</span></a>
+							<a href="authors.html" class="sidebar-buttons material-button"><i class="material-icons">&#xE866;</i><span class="btn-label">Authors</span></a>
+							<a href="privacy-policy.html" class="sidebar-buttons material-button"><i class="material-icons">&#xE87F;</i><span class="btn-label">Privacy Policy</span></a>
+							<a href="contact.html" class="sidebar-buttons material-button"><i class="material-icons">&#xE894;</i><span class="btn-label">Contacts</span></a>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	 	{% endblock %}

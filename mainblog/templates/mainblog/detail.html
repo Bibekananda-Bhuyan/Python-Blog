@@ -1,0 +1,316 @@
+{% extends "mainblog/layout.html" %}
+
+{% block body %}
+	<!--Main container start -->
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}
+        <div class="alert alert-danger">
+            <strong>{{ error|escape }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+	<main class="main-container">
+
+	 
+		<section class="sub-highlight">
+
+			 {% for postdetail in postdetails %}
+			<!-- Detail parallax start -->
+			<div class="parallax-box">
+				<div class="parallax-image" style="background-image: url(../media/{{postdetail.post_banner_image}});"></div>
+				<article class="post-box">
+		    		<div class="post-overlay">
+		    			<div class="post-overlay-inner">
+			    			<a href="#" class="post-category" title="Title of blog post" rel="tag">{{postdetail.post_category}}</a>
+			    			<h1 class="post-title">{{postdetail.post_titel}}</h1>
+			    			<div class="post-meta">
+			    				<div class="post-meta-author-avatar">
+			    					<img alt="avatar" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" class="avatar" height="24" width="24">
+			    				</div>
+			    				<div class="post-meta-author-info">
+			    					<span class="post-meta-author-name">
+			    						<a href="#" title="Posts by John Doe" rel="author">John Doe</a>
+			    					</span>
+			    					<span class="middot">·</span>
+			    					<span class="post-meta-date">
+			    						<abbr class="published updated" title="December 4, 2017">7 hours ago</abbr>
+			    					</span>
+			    				</div>
+			    			</div>
+		    			</div>
+		    		</div>
+		    	</article>
+			</div>
+			<!-- Detail parallax end -->
+			{% endfor %}
+
+		</section>
+		<section class="main-content">
+			<div class="main-content-wrapper">
+				<div class="content-body">
+
+					<!-- article body start -->
+					<article class="article-wrapper">
+						<div class="article-header">
+							<div class="breadcrumb">
+								<ul>
+									 {% for postdetail in postdetails %}
+									<li><a href="/"><span>Home</span></a> <i class="material-icons">&#xE315;</i></li>
+									<li><a href="#"><span>{{postdetail.post_category}}</span></a> <i class="material-icons">&#xE315;</i></li>
+									<li><span>{{postdetail.post_titel}}</span></li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+						<div class="article-content"> <!-- adbox120 or adbox160 -->
+							<div class="article-left-box">
+								<div class="article-left-box-inner">
+									<div class="article-share">
+										<a href="#" class="facebook"></a>
+										<a href="#" class="twitter"></a>
+										<a href="#" class="google-plus"></a>
+									</div>
+									<span class="add-to-favorite" data-zebra-tooltip title="Ad to favorite">
+										<i class="material-icons">&#xE866;</i>
+									</span>
+									<ul class="article-emoticons">
+										<li>
+											<a href="#" class="popular happy"></a><span>13</span>
+											<ul>
+												<li><a href="#" class="love"></a><span>7</span></li>
+												<li><a href="#" class="shocked"></a><span>5</span></li>
+												<li><a href="#" class="angry"></a><span>4</span></li>
+												<li><a href="#" class="crying"></a><span>1</span></li>
+												<li><a href="#" class="sleepy"></a><span>0</span></li>
+											</ul>
+										</li>										
+									</ul>
+								</div>
+							</div>
+
+							<div class="article-inner">
+								 {% autoescape off %}
+								 {% for postdetail in postdetails %}
+									<h2>{{postdetail.post_titel}}</h2>
+								 {{postdetail.post_content}}
+
+								 {% endfor %}
+								 {% endautoescape %}
+							</div>
+
+							<!--this is important for the left ad box or share box fixer -->
+							<div id="endOfTheArticle"></div>
+
+							<!-- More article unit start -->
+							<div class="more-article">
+								<div class="w-header">
+									<div class="w-title">Continue Reading</div>
+									<div class="w-seperator"></div>
+								</div>
+								<div class="more-posts">
+									{% for bodypost in bodyposts %}
+									<div class="columns column-2">
+
+								    	<article class="post-box" style="background-image: url(../media/{{bodypost.post_banner_image}});">
+								    		<div class="post-overlay">
+								    			<a href="/{{bodypost.id}}/{{bodypost.url}}" class="post-category" title="Title of blog post" rel="tag">{{bodypost.post_category}}</a>
+								    			<h3 class="post-title">{{bodypost.post_titel}}</h3>
+								    			<div class="post-meta">
+								    				<div class="post-meta-author-avatar">
+								    					<img alt="avatar" src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50" class="avatar" height="24" width="24">
+								    				</div>
+								    				<div class="post-meta-author-info">
+								    					<span class="post-meta-author-name">
+								    						<a href="/{{bodypost.id}}/{{bodypost.url}}" title="Posts by John Doe" rel="author">John Doe</a>
+								    					</span>
+								    					<span class="middot">·</span>
+								    					<span class="post-meta-date">
+								    						<abbr class="published updated" title="December 4, 2017">12 November 2018</abbr>
+								    					</span>
+								    				</div>
+								    			</div>
+								    		</div>
+								    		<a href="/{{bodypost.id}}/{{bodypost.url}}" class="post-overlayLink"></a>
+								    	</article>
+
+								    </div>
+								     {% endfor %}
+								    
+
+								</div>
+							</div>
+							<!-- More article unit end -->
+
+							<!-- article comment area start -->
+							<div class="article-comments">
+								<div class="w-header">
+									<div class="w-title">Comments (7)</div>
+									<div class="w-seperator"></div>
+								</div>
+								<div class="comment-form">
+									<form action="" method="POST">
+										{% csrf_token %}
+										<div class="comment-columns">
+											<div class="frm-row columns column-3">
+												{{form.username}}
+											</div>
+											<div class="frm-row columns column-3">
+												{{form.useremail}}
+											</div>
+											 
+										</div>
+										<div class="frm-row">
+											{{form.comment}}
+											{% for postdetail in postdetails %}
+											<input type="hidden" name="post" value="{{postdetail.id}}">
+											{% endfor %}
+											
+										</div>
+										<div class="frm-row">
+											 
+											<div class="columns column-2">
+												<button type="submit" class="frm-button full material-button">Send your comment</button>
+											</div>
+											<div class="clearfix"></div>
+										</div>
+				
+									</form>
+								</div>
+								<div class="all-comments">
+
+
+									{% for postcomment in postcomments %}
+									<!-- comment item start -->
+									<div class="comment-item">
+										<div class="comment-avatar">
+											<span class="comment-img"><img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;f=y" width="50" height="50"></span>
+										</div>
+										<div class="comment-content">
+											<div class="comment-header">
+												<span class="author-name">{{postcomment.username}}</span> - 
+												<span class="comment-date">{{postcomment.added_date}}</span>
+											</div>
+											<div class="comment-wrapper">
+												{{postcomment.comment}}
+											</div>
+											 
+										</div>
+									</div>
+									<!-- comment item end -->
+									{% endfor %}
+									 
+
+								</div>
+							</div>
+							<!-- article comment area start -->
+
+						</div>
+					</article>
+					<!-- article body end -->
+
+					<!-- article body start -->
+					<!--
+					<article class="article-wrapper">
+						<div class="article-header">
+							
+						</div>
+						<div class="article-content">
+							<div class="article-share">
+								<div class="article-share-inner">
+									
+								</div>
+							</div>
+							<div class="article-inner">
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								<br><br>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								<br><br>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								<br><br>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+								<br><br>
+								Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+							</div>
+						</div>
+					</article>
+					-->
+					<!-- article body end -->
+					
+
+				</div>
+				<div class="content-sidebar">
+					<div class="sidebar_inner">
+
+						<div class="widget-item">
+							<div class="w-header">
+								<div class="w-title">Popular Posts</div>
+								<div class="w-seperator"></div>
+							</div>
+							<div class="w-boxed-post">
+								<ul>
+									
+									{% for sidepost in sideposts %}
+
+									<li class="active">
+										<a href="/{{sidepost.id}}/{{sidepost.url}}" style="background-image: url(../media/{{sidepost.post_banner_image}});">
+											<div class="box-wrapper">
+												<div class="box-left">
+													<span>{{sidepost.count}}</span>
+												</div>
+												<div class="box-right">
+													<h3 class="p-title">{{sidepost.post_titel}}</h3>
+													<div class="p-icons">
+														213 likes . 124 comments
+													</div>
+												</div>
+											</div>
+										</a>
+									</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+
+
+						<div class="widget-item">
+							<div class="w-header">
+								<div class="w-title">Carousel Posts</div>
+								<div class="w-seperator"></div>
+							</div>
+							<div class="w-carousel-post">
+								<div class="owl-carousel" id="widgetCarousel">
+								  {% for bodyposts in bodyposts %}
+								    <div class="item">
+								    	<a href="/{{bodyposts.id}}/{{bodyposts.url}}">
+								    		<img src="../media/{{bodyposts.post_banner_image}}" width="300">
+								    		<span class="w-post-title">{{bodyposts.post_titel}}</span>
+								    	</a>
+								    </div>
+								   {% endfor %}
+								</div>
+							</div>
+						</div>
+
+						<div class="seperator"></div>
+
+						<a href="#" class="widget-ad-box">
+							<img src="https://img2.chinadaily.com.cn/images/201803/29/5abc4d4aa3105cdce09ff56d.jpeg" width="300" height="250">
+						</a>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+{% endblock %}
+
+
